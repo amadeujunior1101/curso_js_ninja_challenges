@@ -21,7 +21,7 @@ para o nome, idade, peso e data de nascimento dessa pessoa.
     let person = {
         name: "João",
         age: 25,
-        weight: 1.7,
+        weight: 30,
         birthday: "20/10/1990",
     };
 
