@@ -171,7 +171,7 @@ objeto desse array, e adicione a frase abaixo na propriedade `estado`:
 - "[ESTADO] pertence ao Brasil."
 Atribua o novo array a uma variável chamada `map`.
 */
-  let map = newBrasil.map((element, index) => {
+  let map = newBrasil.map((element) => {
     return {
       id: element.id + 1,
       estado: element.estado + " pertence ao Brasil.",
@@ -188,7 +188,7 @@ Mostre no console o array criado acima:
 Filtre o array criado acima, retornando somente os estados que tiverem
 ID par. Atribua o valor à uma variável chamada `filter`.
 */
-  let filter = map.filter(function (item, index) {
+  let filter = map.filter(function (item) {
     return item.id % 2 === 0;
   });
 
