@@ -19,7 +19,7 @@ E assim por diante, até a última.
   let name = "amadeu";
 
   for (let index = 0; index < name.length; index++) {
-    console.log(`${name[index]} é a ${index + 1}ª do meu nome`);
+    console.log(`${name[index]} é a ${index + 1}ª letra do meu nome`);
   }
   /*
 - Declare uma variável chamada `fullName`, que receba seu nome completo,
@@ -54,21 +54,28 @@ O resultado final deve ficar mais ou menos assim:
 5 nomes foi somente uma sugestão ;)
 */
   console.log("\nMeus amigos:");
-  // ?
+  let namesArray = ["Joao", "Pedro", "Manoel", "Marcos", "Vitor"];
+
+  let result = namesArray.reduce((accumulator, current, index) => {
+    let separator = namesArray.length - 1 === index ? " e " : ", ";
+    return accumulator + separator + current;
+  });
+
+  console.log(result + " " + "são meus amigos.");
 
   /*
 Usando o replace(), faça a string "Roberto" virar "Roberta".
 Mostre o resultado no console.
 */
   console.log('\nEra "Roberto", agora é:');
-  // ?
+  console.log("Roberto".replace("to", "ta"));
 
   /*
 Mostre no console a parte "nando" da string "Fernando". Use o método que
 faz a busca do final para o início da string.
 */
   console.log("\nParte de uma string:");
-  // ?
+  console.log("Fernando".substring(8, 3));
 
   /*
 Declare uma variável chamada `myName`, que receba o seu primeiro nome,
@@ -80,5 +87,13 @@ de qualquer tamanho, escrito de qualquer forma.
 Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
 */
   console.log("\nNome com letras intercaladas entre caixa alta e baixa:");
-  // ?
+  let myName = "RoBertO";
+
+  let resultMyName = myName
+    .split("")
+    .map((item, index) => {
+      return index % 2 === 0 ? item.toUpperCase() : item.toLowerCase();
+    })
+    .join("");
+  console.log(resultMyName);
 })();
