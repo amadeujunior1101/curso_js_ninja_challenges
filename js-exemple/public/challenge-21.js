@@ -17,9 +17,9 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 */
   const $counter = document.querySelector('[data-js="counter"]');
 
-  const $start = document.querySelector('[data-js="start"]');
-  const $stop = document.querySelector('[data-js="stop"]');
-  const $reset = document.querySelector('[data-js="reset"]');
+  const $startButton = document.querySelector('[data-js="start"]');
+  const $stopButton = document.querySelector('[data-js="stop"]');
+  const $resetButton = document.querySelector('[data-js="reset"]');
 
   let timer = 0;
   let counting = false;
@@ -33,7 +33,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     return (timer = setTimeout(startTimer, 1000, false));
   }
 
-  $start.addEventListener(
+  $startButton.addEventListener(
     "click",
     () => {
       if (!counting) return startTimer();
@@ -41,7 +41,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     false
   );
 
-  $stop.addEventListener(
+  $stopButton.addEventListener(
     "click",
     () => {
       counting = false;
@@ -51,7 +51,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     false
   );
 
-  $reset.addEventListener(
+  $resetButton.addEventListener(
     "click",
     () => {
       clearTimeout(timer);
