@@ -5,54 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora</title>
   <style>
-    .container{
-      display:flex;
-      flex-direction:column;
-      align-items:center;  
-      justify-content:center;
-    }
-
-    .display{
-        width: 250px;
-        height: 40px;
-        font-size: 25px;
+      .container-fluid {
+        align-items: center;
+        justify-content: center;
+        display: flex;
       }
-
-      .buttons{
-        margin-top: 30px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr ;
-        
+      .wrapper {
+        width: 300px;
+        align-items: center;
+        justify-content: center;
       }
-      .calc{
-        width: 65px;
+      input {
+          width: 200px;
       }
-      
+      button{
+          width: 50px;
+      }
   </style>
 </head>
 <body>
- <div class="container">
-  <h1>Calculadora</h1>
-  <input class="display"type="text" disabled >
-  <div class="buttons">
-   <button class="calc">0</button>
-   <button class="clear">CE</button>
-   <button class="div">/</button>
-   <button class="sum">+</button>
-   <button class="calc">1</button>
-   <button class="calc">2</button>
-   <button class="calc">3</button>
-   <button class="sub">-</button>
-   <button class="calc">4</button>
-   <button class="calc">5</button>
-   <button class="calc">6</button>
-   <button class="mult">X</button>
-   <button class="calc">7</button>
-   <button class="calc">8</button>
-   <button class="calc">9</button>
-   <button class="calculate">=</button>
-   
-  </div>
+ <div class="container-fluid">
+    <div class="wrapper">
+        <h1>Calculadora</h1>
+        <input class="display"type="text" readonly data-js="visor" value="0">
+            <div class="buttons-number">
+                <button data-js= "button-number" value="0">0</button>
+                <button data-js= "button-number" value="1">1</button>
+                <button data-js= "button-number" value="2">2</button>
+                <button data-js= "button-number" value="3">3</button>
+                <button data-js= "button-number" value="4">4</button>
+                <button data-js= "button-number" value="5">5</button>
+                <button data-js= "button-number" value="6">6</button>
+                <button data-js= "button-number" value="7">7</button>
+                <button data-js= "button-number" value="8">8</button>
+                <button data-js= "button-number" value="9">9</button>
+            </div>
+            <div class="operations">
+                <button data-js="button-operation" value="+">+</button>
+                <button data-js="button-operation"  value="-">-</button>
+                <button data-js="button-operation"  value="x">x</button>
+                <button data-js="button-operation" value="/">/</button>
+                <button  data-js="button-equal" value="=">=</button>
+                <button  data-js="button-ce" value="ce">CE</button>
+            </div>
+    </div>
  </div>
 
   <script src="challenge-23.js"></script>

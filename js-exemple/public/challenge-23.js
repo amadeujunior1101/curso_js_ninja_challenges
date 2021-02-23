@@ -1,73 +1,69 @@
 (function (win, doc) {
     "use strict";
 
-    const numbers = doc.querySelectorAll('[class="calc"]');
-    const input = doc.querySelector("input");
-    const ce = doc.querySelector('[class="clear"]');
-    const equal = doc.querySelector('[class="calculate"]');
-    const div = doc.querySelector('[class="div"');
-    const mult = doc.querySelector('[class="mult"]');
-    const sub = doc.querySelector('[class="sub"]');
-    const sum = doc.querySelector('[class="sum"]');
+    const $visor = doc.querySelector('[data-js="visor"]');
+    const $buttonsNumbers = doc.querySelectorAll('[data-js="button-number"]');
+    const $buttonsOperations = doc.querySelectorAll('[data-js="button-operation"]');
+    const $buttonsCE = doc.querySelector('[data-js="button-ce"]');
+    const $buttonEqual = doc.querySelector('[data-js="button-equal"]');
 
-    function handleOperation(operator) {
-        if (input.value.length === 0) return;
+    Array.prototype.forEach.call($buttonsNumbers, (button) => {
+        button.addEventListener("click", handleClickNumber, false);
+    });
 
-        let content = input.value.match(/./g);
-        let last = content.length - 1;
+    Array.prototype.forEach.call($buttonsOperations, (button) => {
+        button.addEventListener("click", handleClickOperation, false);
+    });
 
-        if (
-            content[last] === "/" ||
-            content[last] === "*" ||
-            content[last] === "-" ||
-            content[last] === "+"
-        ) {
-            content[last] = operator;
-            input.value = content.join("");
-        } else input.value += operator;
+    $buttonsCE.addEventListener("click", handleClickCE, false);
+    $buttonEqual.addEventListener("click", handleClickEqual, false);
+
+    function handleClickCE() {
+        $visor.value = 0;
     }
 
-    function handleCalculate() {
-        let result;
-        let op = 1;
-        const expression = input.value.match(/(\d*)([+*-\/])(\d*)/g);
-        expression.forEach((item) => {
-            op = item.match(/(\d*)?([+*-\/])(\d*)/);
-            if (op[1]) result = Number(op[1]);
+    function handleClickOperation() {
+        $visor.value = removeLastItemIfItIsAnOperator($visor.value);
+        $visor.value += this.value;
+    }
 
-            switch (op[2]) {
+    function handleClickNumber() {
+        $visor.value += this.value;
+    }
+
+    function isLastItemAnOperation(number) {
+        let operations = ["+", "-", "x", "/"];
+        let lastItem = number.split("").pop();
+        return operations.some((operator) => {
+            return operator === lastItem;
+        });
+    }
+
+    function removeLastItemIfItIsAnOperator(number) {
+        if (isLastItemAnOperation(number)) return number.slice(0, -1);
+        return number;
+    }
+
+    function handleClickEqual() {
+        $visor.value = removeLastItemIfItIsAnOperator($visor.value);
+        let allValues = $visor.value.match(/\d+[+x/-]?/g);
+        $visor.value = allValues.reduce((accumulated, actual) => {
+            let firstValue = accumulated.slice(0, -1);
+            let operator = accumulated.split("").pop();
+            let lastValue = removeLastItemIfItIsAnOperator(actual);
+            let lastOperator = isLastItemAnOperation(actual) ? actual.split("").pop() : "";
+            switch (operator) {
                 case "+":
-                    result = result + Number(op[3]);
-
-                    break;
+                    return Number(firstValue) + Number(lastValue) + lastOperator;
                 case "-":
-                    result = result - Number(op[3]);
-
-                    break;
-                case "*":
-                    result = result * Number(op[3]);
-
-                    break;
+                    return Number(firstValue) - Number(lastValue) + lastOperator;
+                case "x":
+                    return Number(firstValue) * Number(lastValue) + lastOperator;
                 case "/":
-                    result = result / Number(op[3]);
-                    break;
-
-                default:
-                    break;
+                    return Number(firstValue) / Number(lastValue) + lastOperator;
             }
         });
-        input.value = String(result);
     }
 
-    Array.prototype.forEach.call(numbers, (number, index) =>
-        number.addEventListener("click", () => (input.value += index))
-    );
-
-    ce.addEventListener("click", () => (input.value = ""));
-    equal.addEventListener("click", () => handleCalculate());
-
-    div.addEventListener("click", () => handleOperation("/"));
-    mult.addEventListener("click", () => handleOperation("*"));
-    sub.addEventListener("click", () => handleOperation("-"));
-    sum.addEventListener("click", () => handleOperation("+"));
+    // assitir do 147
 })(window, document);
