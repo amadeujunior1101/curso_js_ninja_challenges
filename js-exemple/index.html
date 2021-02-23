@@ -3,9 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Challenge-22</title>
+  <title>Calculadora</title>
+  <style>
+    .container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;  
+      justify-content:center;
+    }
+
+    .display{
+        width: 250px;
+        height: 40px;
+        font-size: 25px;
+      }
+
+      .buttons{
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+        
+      }
+      .calc{
+        width: 65px;
+      }
+      
+  </style>
 </head>
 <body>
-  <script src="challenge-22.js"></script>
+ <div class="container">
+  <h1>Calculadora</h1>
+  <input class="display"type="text" disabled >
+  <div class="buttons">
+   <button class="calc">0</button>
+   <button class="clear">CE</button>
+   <button class="div">/</button>
+   <button class="sum">+</button>
+   <button class="calc">1</button>
+   <button class="calc">2</button>
+   <button class="calc">3</button>
+   <button class="sub">-</button>
+   <button class="calc">4</button>
+   <button class="calc">5</button>
+   <button class="calc">6</button>
+   <button class="mult">X</button>
+   <button class="calc">7</button>
+   <button class="calc">8</button>
+   <button class="calc">9</button>
+   <button class="calculate">=</button>
+   
+  </div>
+ </div>
+
+  <script src="challenge-23.js"></script>
 </body>
 </html>
