@@ -65,5 +65,4 @@
         });
     }
 
-    // assitir do 147
 })(window, document);
