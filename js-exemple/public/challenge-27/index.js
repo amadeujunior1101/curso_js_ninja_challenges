@@ -101,5 +101,6 @@ O método isNull deve retornar `true` se o valor for null ou undefined.
             Object.prototype.toString.call(param) === "[object Undefined]"
         );
     };
+
     console.log(DOM.isBoolean("text"));
 })();
