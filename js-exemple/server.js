@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public" )));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/challenge-27/index.html");
+  res.sendFile(__dirname + "/public/challenge-28/index.html");
 });
 
 app.listen(3000, () => {
