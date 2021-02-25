@@ -31,7 +31,7 @@
     que será nomeado de "app".
     */
 
-    function app() {
+    var app = (function () {
         return {
             init: function init() {
                 console.log("app init");
@@ -43,7 +43,35 @@
             },
             handleSubmit: function handleSubmit(e) {
                 e.preventDefault();
-                console.log("submit");
+                let $tableCar = DOM('[data-js="table-car"]').get();
+                // console.log($tableCar)
+                $tableCar.appendChild(app.createNewCar());
+            },
+            createNewCar: function createNewCar() {
+                let $fragment = document.createDocumentFragment();
+                let $tr = document.createElement("tr");
+                let $tdImage = document.createElement("td");
+                let $image = document.createElement("img");
+                let $tdBrand = document.createElement("td");
+                let $tdYear = document.createElement("td");
+                let $tdPlate = document.createElement("td");
+                let $tdColor = document.createElement("td");
+
+                $image.src = DOM('[data-js="image"]').get().value;
+                $tdImage.appendChild($image);
+
+                $tdBrand.textContent = DOM('[data-js="brand-model"]').get().value;
+                $tdYear.textContent = DOM('[data-js="year"]').get().value;
+                $tdPlate.textContent = DOM('[data-js="plate"]').get().value;
+                $tdColor.textContent = DOM('[data-js="color"]').get().value;
+
+                $tr.appendChild($tdImage);
+                $tr.appendChild($tdBrand);
+                $tr.appendChild($tdYear);
+                $tr.appendChild($tdPlate);
+                $tr.appendChild($tdColor);
+
+                return $fragment.appendChild($tr);
             },
             companyInfo: function companyInfo() {
                 const ajax = new XMLHttpRequest();
@@ -52,7 +80,7 @@
                 ajax.addEventListener("readystatechange", this.getCompanyInfo, false);
             },
             getCompanyInfo: function getCompanyInfo() {
-                if (!app().isReady.call(this)) return;
+                if (!app.isReady.call(this)) return;
                 const data = JSON.parse(this.responseText);
 
                 let $companyName = DOM('[data-js="company-name"]').get();
@@ -65,6 +93,6 @@
                 return this.readyState === 4 && this.status === 200;
             },
         };
-    }
-    app().init();
+    })();
+    app.init();
 })(window.DOM);
